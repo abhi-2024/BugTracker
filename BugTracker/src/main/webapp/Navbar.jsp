@@ -21,9 +21,9 @@ User user = (User) session.getAttribute("currentUser");
 				<%
 				if (user != null) {
 				%>
-				<li class="nav-item"><a class="nav-link" href="Projects">Projects</a></li>
+				<li class="nav-item"><a class="nav-link active" href="Projects.jsp">Projects</a></li>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
+					class="nav-link active dropdown-toggle" href="#" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> Bugs </a>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="AddBug.jsp">New Bug</a></li>
@@ -42,14 +42,15 @@ User user = (User) session.getAttribute("currentUser");
 				<%
 				if (user == null) {
 				%>
-				<li class="nav-item"><a class="nav-link" href="Login.jsp"><i
+				<li class="nav-item"><a class="nav-link active" href="Login.jsp"><i
 						class="fa-solid fa-person-booth"></i> Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="Signup.jsp"><i
+				<li class="nav-item"><a class="nav-link active" href="Signup.jsp"><i
 						class="fa-solid fa-user-plus"></i> Sign-Up</a></li>
 				<%
 				} else {
 				%>
-				<li class="nav-item"><a class="nav-link" href="Login.jsp"><i class="fa-solid fa-user"></i> <%=user.getFname()%></a></li>
+				<li class="nav-item"><a class="nav-link active" href="Profile.jsp"><i class="fa-solid fa-user"></i> <%=user.getFname()%></a></li>
+				<li class="nav-item"><a class="nav-link active" href="LogoutServ"><i class="fa-solid fa-power-off"></i> Logout</a></li>
 				<%
 				}
 				%>

@@ -9,5 +9,8 @@
 <body>
 <%@include file="Links.jsp" %>
 <%@include file="Navbar.jsp" %>
+<% if(user == null) 
+	response.sendRedirect("Login.jsp");
+%>
 </body>
 </html>

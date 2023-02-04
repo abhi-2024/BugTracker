@@ -59,4 +59,25 @@ public class UserDao {
 		}
 		return user;
 	}
+	
+	public boolean updateUser(User user) {
+		boolean f = false;
+		 try {
+			String s = "update user set userFName=?, userLName=?, userProf=?, userPass=?, userAdd=? where userEmail=?";
+			PreparedStatement stmt = con.prepareStatement(s);
+			stmt.setString(1, user.getFname());
+			stmt.setString(2, user.getLname());
+			stmt.setString(3, user.getProfession());
+			stmt.setString(4, user.getPass());
+			stmt.setString(5, user.getAdd());
+			stmt.setString(6, user.getEmail());
+			
+			stmt.executeUpdate();
+			f=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return f;
+	}
 }
