@@ -7,7 +7,7 @@ User user = (User) session.getAttribute("currentUser");
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark"
 	data-bs-theme="dark">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#"><i class="fa-solid fa-bug"></i>
+		<a class="navbar-brand" href="index.jsp"><i class="fa-solid fa-bug"></i>
 			Bug-Tracker</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"

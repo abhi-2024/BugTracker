@@ -1,3 +1,7 @@
+<%@page import="com.entitites.Bug"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.helper.ConnectionProvider"%>
+<%@page import="com.dao.BugDao"%>
 <%@page import="com.entitites.Alert"%>
 <%@page import="com.entitites.Project"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -12,20 +16,20 @@
 	<%@include file="Links.jsp"%>
 	<%@include file="Navbar.jsp"%>
 	<%
-	if(user==null)
+	if (user == null)
 		response.sendRedirect("Login.jsp");
-	
+
 	Project p = (Project) session.getAttribute("currentProj");
 	%>
 	<div class="d-flex align-items-center mt-5" style="height: 80vh">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 offset-3">
+				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<h1 class="display-6 text-center">Project Details</h1>
+							<h1 class="display-5 text-center">Project Details</h1>
 							<form class="text-end" action="DeleteProjServ" method="post">
-							   <input value="<%=p.getId()%>" name="id" style="display: none;">
+								<input value="<%=p.getId()%>" name="id" style="display: none;">
 								<button type="submit" style="display: none;" id="dbtn"
 									class="btn btn-danger">
 									<i class="fa-solid fa-trash"> Delete</i>
@@ -128,9 +132,70 @@
 								<button type="button" id="tgg" class="btn btn-warning">
 									<i class="fa-solid fa-pen-to-square"></i>
 								</button>
-								<a href="Projects.jsp" id="vbtn" class="btn btn-primary"><i class="fa-solid fa-chevrons-left"></i> View
-									All Projects</a>
+								<a href="Projects.jsp" id="vbtn" class="btn btn-primary"><i
+									class="fa-solid fa-chevrons-left"></i> View All Projects</a>
 							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card" id="track">
+						<div class="card-header">
+							<h1 class="display-5 text-center">Issue Tracker</h1>
+						</div>
+						<div class="card-body">
+							<!--  <h1 class="display-3 text-center">LOADING.... <i class="fa-solid fa-spin fa-spinner"></i></h1> -->
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Issue ID</th>
+										<th scope="col">Name</th>
+										<th scope="col">State</th>
+										<th scope="row">Created On</th>
+									</tr>
+								</thead>
+								<tbody>
+									<%
+									BugDao dao = new BugDao(ConnectionProvider.getConnection());
+									ArrayList<Bug> list = dao.fetchUserProjBug(user.getEmail(), p.getPname());
+									for (Bug bb : list) {
+									%>
+									<tr>
+										<th scope="row"><%=bb.getId()%></th>
+										<td><%=bb.getName()%></td>
+
+										<%
+										if (bb.getStatus() == 1) {
+										%>
+										<td><i class="fa-solid fa-door-closed"
+											style="color: brown;"></i> Closed</td>
+										<%
+										} else if (bb.getStatus() == 2) {
+										%>
+										<td><i class="fa-solid fa-rocket" style="color: red;"></i>
+											Open</td>
+										<%
+										} else if (bb.getStatus() == 3) {
+										%>
+										<td><i class="fa-solid fa-spin fa-spinner"
+											style="color: blue;"></i> In Progress</td>
+										<%
+										} else {
+										%>
+										<td><i class="fa-solid fa-circle-check"
+											style="color: green;"></i> Resolved</td>
+										<%
+										}
+										%>
+										<td>
+										   <%=bb.getDate() %>
+										</td>
+									</tr>
+									<%
+									}
+									%>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -152,6 +217,7 @@
 					$('#dbtn').show();
 					$('#tgg').text('Back To View');
 					$('#vbtn').hide();
+					$('#track').hide();
 					stat = true;
 				} else {
 					$('#tgg').removeClass();
@@ -161,6 +227,7 @@
 					$('#dbtn').hide();
 					$('#tgg').text('Edit');
 					$('#vbtn').show();
+					$('#track').show();
 					stat = false;
 				}
 			});
