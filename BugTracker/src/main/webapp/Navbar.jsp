@@ -30,6 +30,7 @@ User user = (User) session.getAttribute("currentUser");
 						<li><a class="dropdown-item" href="ViewBugs.jsp">Bug
 								Records</a></li>
 					</ul></li>
+					<li class="nav-item"><a class="nav-link active" href="Discussion.jsp">Discussion</a></li>
 				<%
 				}
 				%>

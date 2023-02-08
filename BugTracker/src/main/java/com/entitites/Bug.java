@@ -32,6 +32,18 @@ public class Bug {
 		this.media = media;
 		this.user = user;
 	}
+	
+	
+
+	public Bug(int id, String name, String des, String proj, int status, String date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.des = des;
+		this.proj = proj;
+		this.status = status;
+		this.date = date;
+	}
 
 	public Bug() {
 		super();

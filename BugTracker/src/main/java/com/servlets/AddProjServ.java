@@ -49,7 +49,7 @@ public class AddProjServ extends HttpServlet {
 			se.setAttribute("addProjMSG", alert);
 			response.sendRedirect("Projects.jsp");
 		}else {
-			Alert alert = new Alert("danger", "Can't add project !!");
+			Alert alert = new Alert("danger", "Project Already Exists !!");
 			se.setAttribute("addProjMSG", alert);
 			response.sendRedirect("Projects.jsp");
 		}

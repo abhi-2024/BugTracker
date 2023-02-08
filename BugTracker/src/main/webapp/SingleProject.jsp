@@ -128,9 +128,9 @@
 								</div>
 							</form>
 							<div class="text-end">
-
+							    <button id="trk" class="btn btn-info"><i class="fa-solid fa-chart-line"></i> Track</button>
 								<button type="button" id="tgg" class="btn btn-warning">
-									<i class="fa-solid fa-pen-to-square"></i>
+									Edit
 								</button>
 								<a href="Projects.jsp" id="vbtn" class="btn btn-primary"><i
 									class="fa-solid fa-chevrons-left"></i> View All Projects</a>
@@ -141,11 +141,11 @@
 				<div class="col-md-6">
 					<div class="card" id="track">
 						<div class="card-header">
-							<h1 class="display-5 text-center">Issue Tracker</h1>
+							<h1 class="display-5 text-center" id="head">Issue Tracker</h1>
 						</div>
 						<div class="card-body">
 							<!--  <h1 class="display-3 text-center">LOADING.... <i class="fa-solid fa-spin fa-spinner"></i></h1> -->
-							<table class="table">
+							<table id="table" class="table">
 								<thead>
 									<tr>
 										<th scope="col">Issue ID</th>
@@ -196,6 +196,9 @@
 									%>
 								</tbody>
 							</table>
+							<div id="graph" style="display: none;">
+								<h1 class="display-5 text-center mt-5"><i class="fa-solid fa-spin fa-spinner" style="color: green;"></i> LOADING...</h1>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -208,6 +211,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			let stat = false;
+			let statt = false;
 			$('#tgg').click(function() {
 				if (stat == false) {
 					$('#tgg').removeClass();
@@ -218,6 +222,7 @@
 					$('#tgg').text('Back To View');
 					$('#vbtn').hide();
 					$('#track').hide();
+					$('#trk').hide()
 					stat = true;
 				} else {
 					$('#tgg').removeClass();
@@ -228,7 +233,21 @@
 					$('#tgg').text('Edit');
 					$('#vbtn').show();
 					$('#track').show();
+					$('#trk').show();
 					stat = false;
+				}
+			});
+			$('#trk').click(function(){
+				if(statt==false){
+					$('#table').hide();
+					$('#graph').show();
+					$('#head').text("Project Tracker");
+					statt=true;
+				}else{
+					$('#table').show();
+					$('#graph').hide();
+					$('#head').text("Issue Tracker");
+					statt=false;	
 				}
 			});
 		});
